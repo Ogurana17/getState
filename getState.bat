@@ -39,6 +39,8 @@ echo Windowsの情報ファイルを作成中
 echo ------------------------------
 
 set windowsinfofile=%folderName%\windows-%folderName%.txt
+@REM ReadOnlyを外す
+attrib -r %windowsinfofile% > nul
 dxdiag -t %windowsinfofile%
 certutil -hashfile %windowsinfofile% SHA256 >> %hashfile%
 echo. >> %hashfile%
@@ -49,6 +51,8 @@ echo インストール情報ファイルを作成中
 echo ------------------------------
 
 set installinfofile=%folderName%\install-%folderName%.txt
+@REM ReadOnlyを外す
+attrib -r %installinfofile% > nul
 @REM installのバージョンのみ取得
 @REM wmic product where "Name like '%%Microsoft 365 Apps%%'" get name,version > %installinfofile%
 @REM wmic product where "Name like '%%Office%%'" get name,version > %installinfofile%
@@ -56,5 +60,11 @@ set installinfofile=%folderName%\install-%folderName%.txt
 call powershell -command "Get-ChildItem -Path('HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall','HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall','HKLM:SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall') | %%%% { Get-ItemProperty $_.PsPath | Select-Object DisplayName, DisplayVersion, Publisher }" > %installinfofile%
 certutil -hashfile %installinfofile% SHA256 >> %hashfile%
 
-rem ReadOnlyに書き換える
+echo.
+echo ------------------------------
+echo 生成したファイル読取専用に書き換え中
+echo ------------------------------
+
+attrib +r %windowsinfofile%
+attrib +r %installinfofile%
 attrib +r %hashfile%

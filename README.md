@@ -11,7 +11,7 @@ PCにやや不慣れな人が操作してもしっかりとしたデータが作
 
 ###  管理者
 
-1. zipの状態でPCを操作する人に送る
+1. [zip](https://github.com/Ogurana17/getState/archive/refs/heads/main.zip)の状態でPCを操作する人に送る
 2. ユーザーからデータが送られてくるのを待つ
 
 ### ユーザー

@@ -1,0 +1,2 @@
+# getState
+WindowsPCのハードウェア構成とMSOfficeのバージョンをテキストファイルで取得するバッチファイル。

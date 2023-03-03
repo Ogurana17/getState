@@ -1,41 +1,41 @@
 @echo off
-rem ‚±‚Ìƒoƒbƒ`ƒtƒ@ƒCƒ‹‚ğƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚É‚·‚é
+rem ã“ã®ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ã™ã‚‹
 cd /d %~dp0
 
 echo ------------------------------
-echo ‰º‹L2“_‚ğì¬‚·‚éƒoƒbƒ`
-echo EWindows‚Ìî•ñƒtƒ@ƒCƒ‹
-echo EMSOffice‚Ìî•ñƒtƒ@ƒCƒ‹
+echo ä¸‹è¨˜2ç‚¹ã‚’ä½œæˆã™ã‚‹ãƒãƒƒãƒ
+echo ãƒ»Windowsã®æƒ…å ±ãƒ•ã‚¡ã‚¤ãƒ«
+echo ãƒ»installã®æƒ…å ±ãƒ•ã‚¡ã‚¤ãƒ«
 echo ------------------------------
 
 set folderName=%computername%
 
 echo.
 echo ------------------------------
-echo %computername%ƒtƒHƒ‹ƒ_[‚ğì¬’†
+echo %computername%ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã‚’ä½œæˆä¸­
 echo ------------------------------
 
 mkdir %folderName%
 
 echo.
 echo ------------------------------
-echo ƒnƒbƒVƒ…ƒtƒ@ƒCƒ‹‚ğì¬’†
+echo ãƒãƒƒã‚·ãƒ¥ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆä¸­
 echo ------------------------------
 
 rem new hashfile
 set hashfile=%folderName%\SHA256.txt
-rem ƒnƒbƒVƒ…ƒtƒ@ƒCƒ‹ReadOnly‚ğŠO‚µ‚Ä‰Šú‰»
+rem ãƒãƒƒã‚·ãƒ¥ãƒ•ã‚¡ã‚¤ãƒ«ReadOnlyã‚’å¤–ã—ã¦åˆæœŸåŒ–
 attrib -r %hashfile% > nul
 copy nul %hashfile% > nul
 
 echo %date% %time% >> %hashfile%
-echo ‰º‹L‚ÌƒnƒbƒVƒ…’l‚ÆŸ‚ÌƒRƒ}ƒ“ƒh‚Å¶¬‚³‚ê‚éƒnƒbƒVƒ…’l‚ğ”äŠr‚·‚é‚±‚Æ‚ÅAƒtƒ@ƒCƒ‹‚É‰ü‚´‚ñ‚â”j‘¹“™‚ª–³‚¢‚©‚ğŠm”F‚Å‚«‚Ü‚·B >> %hashfile%
-echo ƒRƒ}ƒ“ƒhƒvƒƒ“ƒvƒg‚É`certutil -hashfile "ŒŸ¸‚µ‚½‚¢ƒtƒ@ƒCƒ‹ƒpƒX" SHA256`‚ğ“ü—ÍB >> %hashfile%
+echo ä¸‹è¨˜ã®ãƒãƒƒã‚·ãƒ¥å€¤ã¨æ¬¡ã®ã‚³ãƒãƒ³ãƒ‰ã§ç”Ÿæˆã•ã‚Œã‚‹ãƒãƒƒã‚·ãƒ¥å€¤ã‚’æ¯”è¼ƒã™ã‚‹ã“ã¨ã§ã€ãƒ•ã‚¡ã‚¤ãƒ«ã«æ”¹ã–ã‚“ã‚„ç ´æç­‰ãŒç„¡ã„ã‹ã‚’ç¢ºèªã§ãã¾ã™ã€‚ >> %hashfile%
+echo ã‚³ãƒãƒ³ãƒ‰ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã«`certutil -hashfile "æ¤œæŸ»ã—ãŸã„ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹" SHA256`ã‚’å…¥åŠ›ã€‚ >> %hashfile%
 echo. >> %hashfile%
 
 echo.
 echo ------------------------------
-echo Windows‚Ìî•ñƒtƒ@ƒCƒ‹‚ğì¬’†
+echo Windowsã®æƒ…å ±ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆä¸­
 echo ------------------------------
 
 set windowsinfofile=%folderName%\windows-%folderName%.txt
@@ -45,12 +45,16 @@ echo. >> %hashfile%
 
 echo.
 echo ------------------------------
-echo MSOffice‚Ìî•ñƒtƒ@ƒCƒ‹‚ğì¬’†
+echo ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æƒ…å ±ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆä¸­
 echo ------------------------------
 
-set msofficeinfofile=%folderName%\msoffice-%folderName%.txt
-wmic product where "Name like '%%Office%%'" get name,version > %msofficeinfofile%
-certutil -hashfile %msofficeinfofile% SHA256 >> %hashfile%
+set installinfofile=%folderName%\install-%folderName%.txt
+@REM installã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®ã¿å–å¾—
+@REM wmic product where "Name like '%%Microsoft 365 Apps%%'" get name,version > %installinfofile%
+@REM wmic product where "Name like '%%Office%%'" get name,version > %installinfofile%
+@REM ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æƒ…å ±ä¸€è¦§
+call powershell -command "Get-ChildItem -Path('HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall','HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall','HKLM:SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall') | %%%% { Get-ItemProperty $_.PsPath | Select-Object DisplayName, DisplayVersion, Publisher }" > %installinfofile%
+certutil -hashfile %installinfofile% SHA256 >> %hashfile%
 
-rem ReadOnly‚É‘‚«Š·‚¦‚é
+rem ReadOnlyã«æ›¸ãæ›ãˆã‚‹
 attrib +r %hashfile%
